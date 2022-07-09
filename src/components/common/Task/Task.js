@@ -1,32 +1,38 @@
 import React from "react";
+import { changeMode } from "../../../store/mode/ModeSlice";
+import { addEditTask } from "../../../store/task/TaskSlice";
+import { useDispatch } from "react-redux";
 
-import EditableEmoji from "../EditableEmoji/EditableEmoji";
+export default (task) => {
 
+    const dispatch = useDispatch()
 
-export default (props) => {
+    const editMode = (e) => {
+        dispatch(changeMode('edit'))
+        dispatch(addEditTask(task))
+    }
 
-
-    if (!props.name) {
+    if (!task.name) {
         return(
-            <div 
-            className="drop-shadow-md cursor-pointer flex p-1 rounded
-                    hover:bg-slate-200 transition"  
-            > 
-            <div className="flex font-bold items-end">
-                <div className="mr-2 text-2xl">+</div>
-                <div className="h-full flex items-center">New</div>
-            </div>
+            <div className="drop-shadow-md cursor-pointer flex p-1 rounded hover:bg-slate-200 transition"> 
+
+                <div className="flex font-bold items-end">
+                    <div className="mr-2 text-2xl">+</div>
+                    <div className="h-full flex items-center">New</div>
+                </div>
             
             </div>
         )
     }
     return (
-            <div 
-                className="border drop-shadow-md cursor-pointer flex p-2 rounded
-                hover:bg-slate-200 transition"  
-            > 
-                <div className="mr-2"><EditableEmoji /></div>
-                <p>{props.name}</p>
+            <div className="border drop-shadow-md flex justify-between p-2 rounded hover:bg-slate-200 transition"> 
+
+                <div className="flex">
+                    <div className="mr-2">{task.emoji}</div>
+                    <p>{task.name}</p>
+                </div>
+                <div className="cursor-pointer border flex" onClick={editMode}>⚙</div>
+            
             </div>
     )
 }

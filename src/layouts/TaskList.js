@@ -9,7 +9,7 @@ export default () => {
         <div className="grid grid-cols-12">
             <h1 className="text-3xl font-bold text-[#37352F] col-span-12 flex items-center ">
                 <div className="cursor-pointer hover:bg-slate-200 rounded">
-                    <EditableIncon emoji={{'emoji':'✔'}}/>
+                    {/* <EditableIncon emoji={'✔'}/> */}
                 </div>
                 <EditableDiv>Task List</EditableDiv>
             </h1>

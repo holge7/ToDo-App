@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Picker from 'emoji-picker-react';
 
-export default (props) => {
-    const [emoji, SetEmoji] = useState(props.emoji ?? {'emoji':'😀'});
-    const [selectEmoji, SetSelectEmoji] = useState(false)
+import { useSelector } from "react-redux";
 
+export default (props) => {
+    const [selectEmoji, SetSelectEmoji] = useState(false)
+    
+    const editTask = useSelector(state => state.task.editTask)
+    
     const onEmojiClick = (e, emojiObject) => {
         SetSelectEmoji(false);
-        SetEmoji(emojiObject);
-        console.log("aaaa")
+        if (props.callback) {
+            props.callback(emojiObject.emoji)
+        }
     }
 
 
     return(
-        <div onClick={()=>{SetSelectEmoji(!selectEmoji)}}>
-            {emoji.emoji}
+        <div className="cursor-pointer" onClick={()=>{SetSelectEmoji(!selectEmoji)}}>
+            {editTask.emoji}
             <div className="absolute z-10">
                 {selectEmoji && 
                     <Picker native disableSearchBar onEmojiClick={onEmojiClick} />
