@@ -13,6 +13,6 @@ export default (props) => {
     }
 
     return(
-        <input value={text} onChange={changeText} className="w-full resize-none focus:outline-none whitespace-pre-wrap" />
+        <textarea rows={1} value={text} onChange={changeText} className={`w-full ${props.resize ? '' : 'resize-none'} focus:outline-none whitespace-pre-wrap`} />
     )
 }

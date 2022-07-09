@@ -9,17 +9,18 @@ const getTasks = tasks => {
 
 export default (props) => {
 
+    let tasks = getTasks(props.tasks);
     return(
         <div className="grid grid-cols-1 grid-flow-row gap-4 h-min">
             <div className="flex">
                 <div className={`mr-4 px-3 rounded ${statusType[props.type].bg} ${statusType[props.type].color}`}>
                     {statusType[props.type].name}
                 </div>
-                <div className="text-gray-500">3</div>
+                <div className="text-gray-500">{tasks.length}</div>
             </div>
             <div className="grid grid-cols-1 gap-1">
-                {getTasks(props.tasks)}
-                <Task />
+                {tasks}
+                <Task ambit={props.type} />
             </div>
         </div>
     )

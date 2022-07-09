@@ -1,6 +1,6 @@
 import React from "react";
 import { changeMode } from "../../../store/mode/ModeSlice";
-import { addEditTask } from "../../../store/task/TaskSlice";
+import { addEditTask, createTask } from "../../../store/task/TaskSlice";
 import { useDispatch } from "react-redux";
 
 export default (task) => {
@@ -12,9 +12,14 @@ export default (task) => {
         dispatch(addEditTask(task))
     }
 
+    const createNewTask = () => {
+        dispatch(createTask(task.ambit))
+        dispatch(changeMode('edit'))
+    }
+
     if (!task.name) {
         return(
-            <div className="drop-shadow-md cursor-pointer flex p-1 rounded hover:bg-slate-200 transition"> 
+            <div onClick={createNewTask} className="drop-shadow-md cursor-pointer flex p-1 rounded hover:bg-slate-200 transition"> 
 
                 <div className="flex font-bold items-end">
                     <div className="mr-2 text-2xl">+</div>
