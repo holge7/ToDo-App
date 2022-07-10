@@ -9,7 +9,7 @@ const initialState = {
         {'idTask':'4', 'description':null, 'emoji':'📋', 'name':'Buy meet', 'status':'done', 'date':new Date().toLocaleString('es-ES', { timeZone: 'UTC' })},
     ],
     lastId:'4',
-    editTask:null,
+    editTask:{},
 }
 
 
