@@ -5,7 +5,7 @@ import Board from './components/components/Board/Board';
 
 function App() {
   return (
-    <div className='grid grid-cols-12 border border-black p-10'>
+    <div className='grid grid-cols-12 p-10'>
       <div className='col-span-12'>
         <TaskList />
       </div>

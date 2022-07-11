@@ -1,16 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import newTask from "../../objects/newTask";
+import { defaultTask } from "../../objects/newTask";
+import localStorageService from "../../sevice/localStotage";
 
-const initialState = {
-    value:[
-        {'idTask':'1', 'description':null, 'emoji':'📋', 'name':'Do the dinner', 'status':'doing', 'date':new Date().toLocaleString('es-ES', { timeZone: 'UTC' })},
-        {'idTask':'2', 'description':null, 'emoji':'📋', 'name':'Sleep', 'status':'todo', 'date':new Date().toLocaleString('es-ES', { timeZone: 'UTC' })},
-        {'idTask':'3', 'description':null, 'emoji':'😎', 'name':'Learn TypeScript', 'status':'todo', 'date':new Date().toLocaleString('es-ES', { timeZone: 'UTC' })},
-        {'idTask':'4', 'description':null, 'emoji':'📋', 'name':'Buy meet', 'status':'done', 'date':new Date().toLocaleString('es-ES', { timeZone: 'UTC' })},
-    ],
-    lastId:'4',
-    editTask:{},
+const localStorage = new localStorageService('tasks');
+
+const getInitialState = () => {
+    const initial = localStorage.get();
+    if (initial) return JSON.parse(initial)
+    return defaultTask;
 }
+
+const initialState = getInitialState();
 
 
 const taskSlice = createSlice({
@@ -24,14 +25,17 @@ const taskSlice = createSlice({
             newTaskk.status = ambit.payload;
             state.value.push(newTaskk);
             state.editTask = newTaskk;
+            localStorage.save(state);
         },
         deleteEditTask: (state) => {
             let taskDelete = state.value.findIndex(tasks => tasks.idTask == state.editTask.idTask);
             state.value.splice(taskDelete, 1);
+            localStorage.save(state);
         },
         commitChanges: (state) => {
             let taskChange = state.value.findIndex(tasks => tasks.idTask == state.editTask.idTask);
             state.value[taskChange] = state.editTask;
+            localStorage.save(state);
         },
         addEditTask: (state, task) => {
             state.editTask = task.payload;

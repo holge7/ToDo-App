@@ -17,12 +17,12 @@ export default () => {
 
     return (
         <div className="grid grid-cols-12 pb-4">
-            <h1 className="text-3xl font-bold text-[#37352F] col-span-12 flex items-center ">
+            <div className="text-3xl font-bold text-[#37352F] col-span-12 flex items-center mb-3">
                 <div className="cursor-pointer hover:bg-slate-200 rounded">
                     <EditableIncon callback={editEmoji} emoji={header.value.emoji}/>
                 </div>
                 <EditableDiv callback={editTitle} >{header.value.title}</EditableDiv>
-            </h1>
+            </div>
             <div className="col-span-4">
                 <EditableDiv callback={editDescription} >           
                     {header.value.description}
